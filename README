@@ -81,9 +81,9 @@ utilities, you can take a look at the unit tests, more in particular :
 
     void LucaskanadeSSDTest();
     void LucaskanadeDescriptorFieldsTest();
-    void LucaskanadeVideoSSDTest();
-    void LucaskanadeVideoDesciptorFieldsTest();
-    void LucaskanadeVideoGradientMagnitudeTest();
+    void LucaskanadeVideoSSDSpeedTest();
+    void LucaskanadeVideoDesciptorFieldsSpeedTest();
+    void LucaskanadeVideoGradientMagnitudeSpeedTest();
 
 
 
