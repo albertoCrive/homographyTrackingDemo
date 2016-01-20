@@ -21,7 +21,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 #include "Typedefs.hpp"
 #include <vector>
-#include <Eigen/Dense>
+
 using namespace cv;
 using namespace std;
 

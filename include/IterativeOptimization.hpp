@@ -23,7 +23,6 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include "Utilities.hpp"
 #include "Homography.hpp"
 
-#include <Eigen/Dense>
 #include <Eigen/LU>
 
 #include <math.h>
@@ -39,7 +38,7 @@ public:
 
 	//these should be protected but there are tests on them.
 	void ComputeWarpedPixels(const StructOfArray2di & pixelsOnTemplate, const vector<float>&  parameters, StructOfArray2di & warpedPixels);
-	void AssembleSDImages(const vector<float>&  parameters, const Mat &imageDx, const Mat &imageDy, const StructOfArray2di & warpedPixels, const vector<Eigen::Matrix<float, 2, N_PARAM> >& warpJacobians,  Eigen::MatrixXf & sdImages);
+    void AssembleSDImages(const vector<float>&  parameters, const Mat &imageDx, const Mat &imageDy, const StructOfArray2di & warpedPixels, const vector<Eigen::Matrix<float, 2, N_PARAM>, Eigen::aligned_allocator<Eigen::Matrix<float, 2, N_PARAM> > > & warpJacobians,  Eigen::MatrixXf & sdImages);
 protected:
 	virtual AlignmentResults GaussNewtonMinimization(const StructOfArray2di & pixelsOnTemplate, const vector<Mat> & images, const vector<Mat> & templates, const OptimizationParameters optParam, vector<float> & parameters) = 0;
 	AlignmentResults PyramidMultiLevelCalibration(const StructOfArray2di & pixelsOnTemplate, vector<Mat> &templateDescriptorFields, vector<Mat> &imageDescriptorFields, vector<float> & parameters, OptimizationParameters & optimizationParameters);

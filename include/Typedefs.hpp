@@ -18,7 +18,8 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #ifndef TYPEDEFS_HPP_
 #define TYPEDEFS_HPP_
 #include "opencv2/opencv.hpp"
-
+#include <Eigen/Dense>
+#include <Eigen/StdVector>
 #ifndef uint
 typedef unsigned int uint;
 #endif

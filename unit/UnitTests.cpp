@@ -259,7 +259,7 @@ void SDImagesTest()
 	Eigen::MatrixXf sdImages(controlPoints.size(), 8);
 	LucasKanade optimization;
 	optimization.ComputeWarpedPixels(controlPoints, parametersInitialGuess, warpedPixels);
-	vector<Eigen::Matrix<float, 2, N_PARAM> > warpJacobians(controlPoints.size());
+	vector<Eigen::Matrix<float, 2, N_PARAM>, Eigen::aligned_allocator<Eigen::Matrix<float, 2, N_PARAM> > > warpJacobians(controlPoints.size());
 	for (uint iPoint(0); iPoint < controlPoints.size(); ++iPoint)
 		Homography::ComputeWarpJacobian(controlPoints.x[iPoint], controlPoints.y[iPoint], parametersInitialGuess, warpJacobians[iPoint]);
 

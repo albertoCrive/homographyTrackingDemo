@@ -20,7 +20,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 #include <vector>
 #include <string>
-#include <Eigen/Dense>
+
 #include "Typedefs.hpp"
 #include <fstream>
 #include <iostream>

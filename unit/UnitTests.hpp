@@ -25,7 +25,6 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <assert.h>
 #include <ctime>
 #include <cmath>
-#include <Eigen/Dense>
 #include<stdio.h>
 #include <chrono>
 

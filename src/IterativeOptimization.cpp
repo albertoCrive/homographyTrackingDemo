@@ -230,7 +230,7 @@ void IterativeOptimization::ComputeWarpedPixels(const StructOfArray2di & pixelsO
 	}
 }
 
-void IterativeOptimization::AssembleSDImages(const vector<float>&  parameters, const Mat &imageDx, const Mat &imageDy, const StructOfArray2di & warpedPixels, const vector<Eigen::Matrix<float, 2, N_PARAM> >& warpJacobians,  Eigen::MatrixXf & sdImages)
+void IterativeOptimization::AssembleSDImages(const vector<float>&  parameters, const Mat &imageDx, const Mat &imageDy, const StructOfArray2di & warpedPixels, const vector<Eigen::Matrix<float, 2, N_PARAM>, Eigen::aligned_allocator<Eigen::Matrix<float, 2, N_PARAM> > > & warpJacobians,  Eigen::MatrixXf & sdImages)
 {
 
 	// KMYI: OMP for parallization
@@ -271,7 +271,8 @@ AlignmentResults LucasKanade::GaussNewtonMinimization(const StructOfArray2di & p
 	vector<Mat> imageDx(nChannels), imageDy(nChannels);
 	uint nParam = parameters.size();
 
-	vector<Eigen::Matrix<float, 2, N_PARAM> > warpJacobians(pixelsOnTemplate.size());
+    vector<Eigen::Matrix<float, 2, N_PARAM>, Eigen::aligned_allocator<Eigen::Matrix<float, 2, N_PARAM> > >
+            warpJacobians(pixelsOnTemplate.size());
 
 	Eigen::MatrixXf sdImages(pixelsOnTemplate.size(), nParam);
 	vector<float>  errorImage(pixelsOnTemplate.size(), 0.0);
