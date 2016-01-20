@@ -22,6 +22,11 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <string>
 #include <Eigen/Dense>
 #include "Typedefs.hpp"
+#include <fstream>
+#include <iostream>
+#include "Homography.hpp"
+#include <sstream>
+#include <vector>
 
 using namespace cv;
 using namespace std;

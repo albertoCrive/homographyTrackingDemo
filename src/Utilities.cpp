@@ -15,17 +15,10 @@ this program; if not, write to the Free Software Foundation, Inc., 51 Franklin
 Street, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
-#include <fstream>
-#include <iostream>
 #include "Utilities.hpp"
-#include "Homography.hpp"
-#include <sstream>
-#include <vector>
-#include "opencv2/opencv.hpp"
+
 using namespace std;
 using namespace cv;
-
-
 
 
 

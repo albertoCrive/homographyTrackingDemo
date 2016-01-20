@@ -18,8 +18,11 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 #ifndef ITERATIVEOPTIMIZATION_HPP_
 #define ITERATIVEOPTIMIZATION_HPP_
-#include "opencv2/opencv.hpp"
+
 #include "Typedefs.hpp"
+#include "Utilities.hpp"
+#include "Homography.hpp"
+
 #include <Eigen/Dense>
 #include <Eigen/LU>
 

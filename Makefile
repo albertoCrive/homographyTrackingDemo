@@ -31,7 +31,7 @@ libCppDebug:	$(LIB_CPP)
 
 $(LIB_CPP): $(SOURCES) $(OBJECTS)
 	@echo ——————— compiling the Homography library  ——————— 
-	$(CC) -shared $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) -shared $(CFLAGS) $(OBJECTS) $(LDFLAGS) -o $@
 
 demoRelease: ##		executable - release mode 
 demoRelease: CFLAGS += $(CFLAGS_RELEASE)

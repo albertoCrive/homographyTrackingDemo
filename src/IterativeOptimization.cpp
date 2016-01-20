@@ -17,9 +17,6 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 #include "IterativeOptimization.hpp"
 
-#include "Utilities.hpp"
-#include "Homography.hpp"
-
 using namespace std;
 using namespace cv;
 
@@ -260,73 +257,14 @@ void IterativeOptimization::AssembleSDImages(const vector<float>&  parameters, c
 
 
 
-// namespace myMem
-// {
-// // parameters must contain the initial guess. It is updated during optimization
-// uint nChannels;
-// std::vector<std::vector<float> > templatePixelIntensities;
-// vector<Mat> imageDx, imageDy;
-// uint nParam;
-
-// vector<Eigen::Matrix<float, 2, N_PARAM> > warpJacobians;
-// //AlignmentResults alignmentResults;
-// Eigen::MatrixXf sdImages;
-// vector<float>  errorImage;
-
-// StructOfArray2di warpedPixels;
-// Eigen::Matrix<float, N_PARAM, N_PARAM> hessian;
-// Eigen::Matrix<float, N_PARAM, 1> rhs;
-// Eigen::Matrix<float, N_PARAM, 1> deltaParam;
-
-// bool init = 0;
-// };
-
-// void setInit(const int n)
-// {
-// 	myMem::init = n;
-// }
-
-// void initmyMem(const StructOfArray2di & pixelsOnTemplate, const vector<Mat> &images, const vector<float> & parameters)
-// {
-// 	//using namespace myMem;
-// 	myMem::nChannels = images.size();
-// 	myMem::templatePixelIntensities.resize(myMem::nChannels);
-// 	myMem::imageDx.resize(myMem::nChannels);
-// 	myMem::imageDy.resize(myMem::nChannels);
-// 	myMem::nParam = parameters.size();
-
-// 	myMem::warpJacobians.resize(pixelsOnTemplate.size());
-// 	//myMem::alignmentResults.nIter = 0;
-// 	//myMem::alignmentResults.exitFlag = 1e6;
-// 	myMem::sdImages = Eigen::MatrixXf(pixelsOnTemplate.size(), myMem::nParam);
-// 	myMem::errorImage = vector<float>(pixelsOnTemplate.size(), 0.0);
-
-// 	myMem::init = 1;
-// };
 
 AlignmentResults LucasKanade::GaussNewtonMinimization(const StructOfArray2di & pixelsOnTemplate, const vector<Mat> & images, const vector<Mat> & templates, const OptimizationParameters optParam, vector<float> & parameters)
 {
-
-	// for (int i=0;i<8;i++)
-	// 	cout<<parameters[i]<<"\t";
-	// cout << endl;
-
-// #define USE_NAMESPACE 0//0 or 1
 
  	AlignmentResults alignmentResults;
  	alignmentResults.nIter = 0;
  	alignmentResults.exitFlag = 1e6;
 
-// #if USE_NAMESPACE == 1
-// 	using namespace myMem;
-// 	if (init == 0)
-// 	{
-// 		printf("in init%u\n",uint(images.size()));
-// 		initmyMem(pixelsOnTemplate,images,parameters);
-// 		printf("done %u\n",nChannels);
-// 	}
-// 	//comment from here
-// #else
 	//parameters must contain the initial guess. It is updated during optimization
 	uint nChannels(images.size());
 	vector<vector<float> > templatePixelIntensities(nChannels,vector<float>(pixelsOnTemplate.size()));
@@ -342,23 +280,7 @@ AlignmentResults LucasKanade::GaussNewtonMinimization(const StructOfArray2di & p
 	Eigen::Matrix<float, N_PARAM, N_PARAM> hessian;
 	Eigen::Matrix<float, N_PARAM, 1> rhs;
 	Eigen::Matrix<float, N_PARAM, 1> deltaParam;
-//#endif
-	//to here
 
-
-
-// #if USE_NAMESPACE == 1
-// 	//init val
-// 	sdImages = Eigen::MatrixXf(pixelsOnTemplate.size(), nParam);
-// 	fill(errorImage.begin(), errorImage.end(), 0);//same time as memset in -O3
-// #endif
-
-	//vector <Eigen::MatrixXf> tmpHessian(images.size());
-	//vector <Eigen::MatrixXf> tmpsdImages(images.size(),sdImages);
-	//vector <vector<float> >  tmperrorImage(images.size(),errorImage);
-
-	//#pragma omp parallel for
-	//#pragma unroll
 	for(int iChannel = 0; iChannel<nChannels; ++iChannel)
 	{
 		ComputeImageDerivatives(images[iChannel], imageDx[iChannel], imageDy[iChannel]);
@@ -401,7 +323,6 @@ AlignmentResults LucasKanade::GaussNewtonMinimization(const StructOfArray2di & p
 			hessian += sdImages.transpose() * sdImages;
 			//tmpHessian[iChannel] = tmpsdImages[iChannel].transpose() * tmpsdImages[iChannel];
 
-//#pragma unroll
 			for (int i = 0; i<nParam; ++i)
 			{
 				for(uint iPoint(0); iPoint<pixelsOnTemplate.size(); ++iPoint)
@@ -413,14 +334,8 @@ AlignmentResults LucasKanade::GaussNewtonMinimization(const StructOfArray2di & p
 			}
 		}
 
-		//for(int iChannel = 0; iChannel<images.size(); ++iChannel)
-		//	hessian += tmpsdImages[iChannel].transpose() * tmpsdImages[iChannel];//tmpHessian[iChannel];
-
 		deltaParam = hessian.fullPivLu().solve(rhs);
-		//deltaParam = hessian.partialPivLu().solve(rhs);
 
-		//#pragma omp parallel for
-		//#pragma unroll
 		for(int i = 0; i<nParam; ++i)
 			parameters[i] += deltaParam(i,0);
 

@@ -16,17 +16,9 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
  */
 
 
-#include <algorithm>    // std::max
-#include <assert.h>
-#include <ctime>
-#include <cmath>
-#include <Eigen/Dense>
-#include<stdio.h>
-#include <chrono>
 
-#include "HomographyEstimation.hpp"
-
-
+#include "UnitTests.hpp"
+	
 using namespace cv;
 using namespace std;
 using namespace std::chrono;

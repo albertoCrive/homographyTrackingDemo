@@ -18,10 +18,10 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 #ifndef HOMOGRAPHY_H_
 #define HOMOGRAPHY_H_
-#include <opencv2/opencv.hpp>
+
+#include "Typedefs.hpp"
 #include <vector>
 #include <Eigen/Dense>
-#include "Typedefs.hpp"
 using namespace cv;
 using namespace std;
 

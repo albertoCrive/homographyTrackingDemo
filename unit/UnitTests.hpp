@@ -17,13 +17,19 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 
 #ifndef TESTS_HPP_
 #define TESTS_HPP_
-#include "opencv2/calib3d/calib3d.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/features2d/features2d.hpp"
 #include <iostream>
 #include <list>
 #include <vector>
+
+#include <algorithm>    // std::max
+#include <assert.h>
+#include <ctime>
+#include <cmath>
+#include <Eigen/Dense>
+#include<stdio.h>
+#include <chrono>
+
+#include "HomographyEstimation.hpp"
 
 
 void RunAllTests();
